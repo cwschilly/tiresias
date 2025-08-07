@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiresias"
+version = "0.1.0"
+dependencies = [
+    "argparse",
+    "torch",
+    "numpy",
+    "matplotlib",
+    "pandas",
+    "bs4",
+    "requests"
+]
+
+[tool.setuptools.packages.find]
+where = ["src", "scripts"]

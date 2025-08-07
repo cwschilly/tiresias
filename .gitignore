@@ -1,0 +1,7 @@
+# General
+.vscode
+misc
+
+# Python artificats
+*.egg-info
+__pycache__
