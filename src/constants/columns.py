@@ -1,3 +1,7 @@
+"""
+Define all columns of the input dataset.
+"""
+
 FEATURE_COLUMNS = [
     "budget",               # float (millions USD)
     "runtime",              # float (minutes)

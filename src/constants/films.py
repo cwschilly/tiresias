@@ -1,3 +1,7 @@
+"""
+Titles and years of all Christopher Nolan films.
+"""
+
 ALL_FILMS = {
     "following": 1998,
     "memento": 2000,

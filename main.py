@@ -8,7 +8,7 @@ DATA_FILE = "2025-08-07-dataset.csv"
 def main():
 
     # Welcome to Tiresias!
-    WORDMARK()
+    print(WORDMARK)
 
     # Let's add some data to our DataManager (dm)
     dm = DataManager(DATA_DIR, RESULTS_DIR)

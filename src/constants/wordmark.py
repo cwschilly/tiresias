@@ -1,8 +1,11 @@
-# ASCII Art from:
-# https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+"""
+Official wordmark of the blind seer.
 
-def WORDMARK():
-    print("""
+ASCII Art from:
+https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+"""
+
+WORDMARK = r"""
 ------------------------------------------------------------
 ************************************************************
 
@@ -14,4 +17,4 @@ def WORDMARK():
 
 ************************************************************
 ------------------------------------------------------------
-    """)
+"""

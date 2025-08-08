@@ -12,7 +12,7 @@ dependencies = [
     "matplotlib",
     "pandas",
     "bs4",
-    "requests"
+    "requests",
 ]
 
 [tool.setuptools.packages.find]

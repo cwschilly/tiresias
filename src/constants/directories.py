@@ -1,3 +1,6 @@
+"""
+Define location of all key directories, with respect to this file.
+"""
 import os
 
 CONSTANTS_DIR = os.path.dirname(os.path.realpath(__file__))
