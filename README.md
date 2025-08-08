@@ -24,15 +24,16 @@ Then just run:
 python main.py
 ```
 
+> [!TIP]
+> At any point in the execution, exit the program by typing `Ctrl + C`.
+
 I'm hoping to move all this into a web app soon, which will remove the installation step and make the runtime even simpler.
 In the meantime, this is what we've got.
 
 ## Contributing
 
-`tiresias` is, of course, open-source. Feel free to [open issues](https://github.com/cwschilly/tiresias/issues/new), put up PRs with cool features, and generally ~~steal~~ use my IP. There's a short developer's guide in the
-`doc/` folder if you're interested in contributing.
-
-And if you do use the code, I would appreciate a citation.
+`tiresias` is, of course, open-source. Feel free to [open issues](https://github.com/cwschilly/tiresias/issues/new), put up PRs with cool features, and generally ~~steal~~ use the project as you like.
+There's a short developer's guide in the `doc/` folder if you're interested in contributing.
 
 ---
 
