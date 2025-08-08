@@ -1,8 +1,10 @@
+![GitHub](https://img.shields.io/github/license/hpc-simtools/ips-framework)
+
 # Tiresias: The Blind Seer
 
 Will Christopher Nolan's _The Odyssey_ (2026) make money? Will it win any awards? And most importantly of all, _will **you** like it??_
 
-[Tiresias](https://en.wikipedia.org/wiki/Tiresias) is here to peer into the future.
+`tiresias` ([who?](https://en.wikipedia.org/wiki/Tiresias)) is here to peer into the future.
 
 <!-- Read all about it [here](calebschilly.substack.com). -->
 
@@ -12,7 +14,8 @@ For now, clone the repo and install the `tiresias` package into your favorite Py
 
 ```sh
 git clone https://github.com/cwschilly/tiresias.git
-pip install tiresias
+cd tiresias
+pip install .
 ```
 
 Then just run:
@@ -26,9 +29,10 @@ In the meantime, this is what we've got.
 
 ## Contributing
 
-`tiresias` is, of course, open-source. Feel free to [open issues](https://github.com/cwschilly/tiresias/issues/new), put up PRs with cool features, and generally ~~steal~~ use my IP.
+`tiresias` is, of course, open-source. Feel free to [open issues](https://github.com/cwschilly/tiresias/issues/new), put up PRs with cool features, and generally ~~steal~~ use my IP. There's a short developer's guide in the
+`doc/` folder if you're interested in contributing.
 
-If you do use the code, I would appreciate a citation.
+And if you do use the code, I would appreciate a citation.
 
 ---
 

@@ -1,6 +1,14 @@
+####################################################################
+#                                                                  #
+#                   Copyright 2025 Caleb Schilly                   #
+# See the LICENSE file at the top-level directory of this project. #
+#                                                                  #
+####################################################################
+
 """
 Define location of all key directories, with respect to this file.
 """
+
 import os
 
 CONSTANTS_DIR = os.path.dirname(os.path.realpath(__file__))

@@ -1,3 +1,10 @@
+####################################################################
+#                                                                  #
+#                   Copyright 2025 Caleb Schilly                   #
+# See the LICENSE file at the top-level directory of this project. #
+#                                                                  #
+####################################################################
+
 """
 Core manager class to handle all training/testing data.
 Pass this around instead of maintaining various dataframes.
@@ -10,17 +17,14 @@ from src.helpers.ratings import getUserRatings
 
 class DataManager:
     """
-    DataManager class. Instantiate with the directory containing
-    all data files.
+    DataManager class.
 
-    If the output_dir is given, plots and other output will be
-    written there. If not, output will be placed in the
-    data directory.
-
-    Test ratio is used to split the full dataset into train
-    and testing data. It defaults to 0.25, meaning that
-    the one quarter of the original dataset will be set
-    aside for testing.
+    Arguments:
+        - data_dir: path to the directory containing all data files.
+        - output_dir (Optional): where to write plots and other output.
+            * If omitted, output will write to the data directory.
+        - test_ratio (Optional): percentage of original training data to be set
+            aside for testing. Default: 0.25
     """
 
     def __init__(self, data_dir: str, output_dir: str = None, test_ratio = 0.25):

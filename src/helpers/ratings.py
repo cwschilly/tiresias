@@ -1,3 +1,10 @@
+####################################################################
+#                                                                  #
+#                   Copyright 2025 Caleb Schilly                   #
+# See the LICENSE file at the top-level directory of this project. #
+#                                                                  #
+####################################################################
+
 """
 Functions related to scraping a user's Letterboxd account
 and prompting the user for manual ratings to all Nolan films.

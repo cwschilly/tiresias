@@ -1,5 +1,12 @@
+####################################################################
+#                                                                  #
+#                   Copyright 2025 Caleb Schilly                   #
+# See the LICENSE file at the top-level directory of this project. #
+#                                                                  #
+####################################################################
+
 """
-Define all columns of the input dataset.
+columns.py: This file defines all columns of the input dataset.
 """
 
 FEATURE_COLUMNS = [
