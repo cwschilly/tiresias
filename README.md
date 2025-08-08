@@ -4,7 +4,7 @@
 
 Will Christopher Nolan's _The Odyssey_ (2026) make money? Will it win any awards? And most importantly of all, _will **you** like it??_
 
-`tiresias` ([who?](https://en.wikipedia.org/wiki/Tiresias)) is here to peer into the future.
+Tiresias ([who?](https://en.wikipedia.org/wiki/Tiresias)) is here to peer into the future.
 
 <!-- Read all about it [here](calebschilly.substack.com). -->
 
