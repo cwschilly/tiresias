@@ -1,6 +1,7 @@
 # General
 .vscode
 misc
+explore
 
 # Python artificats
 *.egg-info

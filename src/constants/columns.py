@@ -5,14 +5,14 @@ FEATURE_COLUMNS = [
     "release_month",        # int (1-12)
     "star_power",           # float
     "theater_window",       # int
-    "film_rating",          # str ("G", "PG", "PG-13", "R")
+    "film_rating",          # bool (PG-13: 0, R: 1)
     "nolan_index",          # unitless
     "imax_ratio",           # pct
     "avg_annual_box_office" # float (billions USD)
-    "covid_year",           # bool
 ]
 
 TARGET_COLUMNS = [
+    "user_rating",          # float
     "letterbox_avg_rating", # float
     "total_box_office_usd", # float (millions USD)
     "oscar_noms"            # int

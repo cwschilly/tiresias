@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 from constants.films import ALL_FILMS
-from helpers.utils import format_list_of_films
+from helpers.utils import formatListOfFilms
 
 """Work-in-progress; script to query a user's Letterboxd account to get personal Nolan ratings."""
 
@@ -55,7 +55,7 @@ def get_letterboxd_ratings(username):
             film_title = film.find('img')['alt']
             rating_tag = film.find('span', class_='rating')
 
-            if film_title in format_list_of_films(ALL_FILMS.keys()) and rating_tag:
+            if film_title in formatListOfFilms(ALL_FILMS.keys()) and rating_tag:
                 rating = stars_to_float(rating_tag.text.strip())
                 all_ratings[film_title] = rating
 
@@ -64,7 +64,7 @@ def get_letterboxd_ratings(username):
 
     df = pd.DataFrame([
         {'title': title, 'rating': all_ratings.get(title, None)}
-        for title in format_list_of_films(ALL_FILMS.keys())
+        for title in formatListOfFilms(ALL_FILMS.keys())
     ])
 
     return df
