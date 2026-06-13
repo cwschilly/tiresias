@@ -1,0 +1,7 @@
+torch
+onnx
+pandas
+scikit-learn
+gspread
+onnx
+onnxruntime

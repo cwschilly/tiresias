@@ -1,0 +1,36 @@
+/* ── Tiresias — shared theme ───────────────────────────────────────────────── */
+:root {
+  --green-dark:   #1d6d47;
+  --green-mid:    #2a8f5e;
+  --green-light:  #89dd9d;
+  --green-pale:   #e8f5ec;
+  --rust:         #c4694d;
+  --rust-dark:    #a3502e;
+  --bg:           #f5f5f5;
+  --panel:        #efefef;
+  --border:       #d8d8d8;
+  --text:         #1a1a1a;
+  --text-sec:     #1d6d47;
+  --text-muted:   #888;
+
+  --font-serif:   "Georgia", "Liberation Serif", serif;
+  --font-mono:    "Courier New", monospace;
+
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+
+  --transition:   0.25s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font-serif);
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--green-dark); text-decoration: none; }
+a:hover { color: var(--rust); }

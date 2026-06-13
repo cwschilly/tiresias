@@ -1,0 +1,193 @@
+/* ── Tiresias — tool page ──────────────────────────────────────────────────── */
+
+body.tool-page {
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+header { margin-bottom: 36px; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  transition: color var(--transition);
+}
+.back-link:hover { color: var(--green-dark); }
+.back-link::before { content: "←"; }
+
+header h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+header p {
+  color: var(--text-sec);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0 24px;
+}
+
+/* ── Instructions ── */
+.instructions {
+  background: var(--panel);
+  border-left: 3px solid var(--green-light);
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.65;
+  margin-bottom: 32px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ── Film grid ── */
+.film-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 520px) {
+  .film-grid { grid-template-columns: 1fr; }
+}
+
+.film-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  transition: border-color var(--transition);
+}
+
+.film-card.rated { border-color: var(--green-light); }
+
+.film-card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-sec);
+  margin-bottom: 8px;
+}
+
+/* ── Stars ── */
+.star-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.half-star {
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.1s;
+  user-select: none;
+  line-height: 1;
+}
+.half-star.active { color: var(--green-light); }
+.half-star:hover  { color: var(--green-dark); }
+
+.unseen-btn {
+  margin-left: 5px;
+  font-size: 0.68rem;
+  color: #aaa;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  transition: border-color var(--transition), color var(--transition);
+}
+.unseen-btn:hover { border-color: var(--rust); color: var(--rust); }
+
+.rating-display {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+  height: 13px;
+}
+
+/* ── Predict button ── */
+.predict-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: var(--green-dark);
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition);
+  margin-bottom: 12px;
+}
+.predict-btn:hover:not(:disabled) { background: var(--green-mid); }
+.predict-btn:disabled { background: #bbb; cursor: not-allowed; }
+
+.min-notice {
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.min-notice span { color: var(--rust); font-weight: bold; }
+
+/* ── Result card ── */
+#result {
+  display: none;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+#result h2 {
+  font-size: 0.95rem;
+  color: var(--text-sec);
+  margin-bottom: 14px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.big-rating {
+  font-size: 3.8rem;
+  font-weight: bold;
+  color: var(--rust);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stars-display {
+  font-size: 1.9rem;
+  color: var(--green-light);
+  margin-bottom: 14px;
+}
+
+.confidence {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}

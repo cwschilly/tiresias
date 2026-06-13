@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiresias</title>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/landing.css"/>
+</head>
+<body class="landing">
+
+  <div class="title-block">
+    <h1>TIRESIAS</h1>
+    <p class="subtitle">Will you like The Odyssey (2026)?</p>
+  </div>
+
+  <!-- Button sits above the eye -->
+  <button class="ask-btn" id="askBtn">Ask Tiresias</button>
+
+  <!-- Eye SVG sits below the button -->
+  <div class="eye-stage" id="eyeStage">
+    <svg id="eye-svg" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="eye-clip">
+          <path id="eye-clip-path" d="M 20 60 L 300 60"/>
+        </clipPath>
+      </defs>
+
+      <!-- Eye white — only visible when open -->
+      <path id="eye-white"
+            fill="var(--bg)" stroke="none"
+            d="M 20 60 L 300 60"/>
+
+      <!-- Iris (clipped to open eye region) -->
+      <circle id="eye-iris" class="eye-iris" cx="160" cy="60" r="36"
+              clip-path="url(#eye-clip)"/>
+
+      <!-- Pupil -->
+      <circle id="eye-pupil" class="eye-pupil" cx="160" cy="60" r="15"
+              clip-path="url(#eye-clip)"/>
+
+      <!-- Shine -->
+      <circle id="eye-shine" class="eye-shine" cx="170" cy="53" r="6"
+              clip-path="url(#eye-clip)"/>
+
+      <!-- Bottom lid (static lower arc, always visible) -->
+      <path id="lid-bottom" class="eyelid-bottom"
+            fill="var(--bg)" stroke="var(--green-dark)" stroke-width="2"
+            d="M 300 60 C 230 60, 90 60, 20 60"/>
+
+      <!-- Top lid (animates upward on open) -->
+      <path id="lid-top" class="eyelid-top"
+            fill="var(--bg)" stroke="var(--green-dark)" stroke-width="2"
+            d="M 20 60 C 90 60, 230 60, 300 60"/>
+    </svg>
+  </div>
+
+  <!-- Expand overlay — iris green circle that grows to fill screen -->
+  <div id="expand-overlay"></div>
+
+  <p class="landing-footer">Towards a unified theory of Christopher Nolan</p>
+
+  <script type="module">
+    import EYE from "./js/eye.js";
+
+    const askBtn = document.getElementById("askBtn");
+    EYE.init();
+
+    askBtn.addEventListener("mouseenter", () => EYE.hover());
+    askBtn.addEventListener("mouseleave", () => EYE.unhover());
+
+    askBtn.addEventListener("click", () => {
+      askBtn.disabled = true;
+      EYE.openThenNavigate("tool.html");
+    });
+  </script>
+
+</body>
+</html>

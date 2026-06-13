@@ -1,0 +1,9 @@
+# Generated files
+output/
+
+# Data fetching (reserved for admins)
+fetch.py
+credentials.json
+
+# Python artifacts
+__pycache__/

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiresias — Rate & Predict</title>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/tool.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.17.1/ort.min.js"></script>
+</head>
+<body class="tool-page">
+<div class="container">
+
+  <header>
+    <a class="back-link" href="index.html">Back to Tiresias</a>
+    <h1>Will you like<br><em>The Odyssey</em>?</h1>
+    <hr class="rule"/>
+    <p>
+      Rate the Nolan films you've seen below. Tiresias will use your taste
+      profile to predict your rating for <em>The Odyssey</em>.
+    </p>
+  </header>
+
+  <div class="instructions">
+    Use the half-star selectors to rate each film you've seen — skip anything
+    you haven't watched. The more you rate, the sharper the prediction.
+    A minimum of <strong>3 ratings</strong> is required.
+  </div>
+
+  <div class="film-grid" id="filmGrid"></div>
+
+  <div class="min-notice" id="minNotice">
+    Rate at least <span id="remaining">3</span> more film(s) to unlock your prediction.
+  </div>
+
+  <button class="predict-btn" id="predictBtn" disabled>
+    Consult Tiresias
+  </button>
+
+  <div id="result">
+    <h2>Tiresias predicts your rating for <em>The Odyssey</em>:</h2>
+    <div class="big-rating" id="bigRating"></div>
+    <div class="stars-display" id="starsDisplay"></div>
+    <div class="confidence" id="confidenceNote"></div>
+  </div>
+
+</div>
+
+<script type="module" src="js/tool.js"></script>
+</body>
+</html>
