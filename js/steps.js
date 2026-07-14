@@ -1,6 +1,7 @@
 /* js/steps.js — Wrapped-style tap-through step controller.
-   One .step visible at a time; next/back via buttons, arrow keys, or
-   vertical swipe. Progress dots reflect the current position. */
+   One .step visible at a time; navigation is buttons-only (scroll and
+   swipe gestures must never change steps — steps have scrollable content).
+   Progress dots reflect the current position. */
 
 export function createSteps(container, { onEnter = () => {} } = {}) {
   const steps = [...container.querySelectorAll(".step")];
@@ -23,25 +24,6 @@ export function createSteps(container, { onEnter = () => {} } = {}) {
     container.scrollTop = 0;
     onEnter(current);
   }
-
-  container.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowDown" || e.key === "ArrowRight") show(current + 1, 1);
-    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") show(current - 1, -1);
-    else return;
-    e.preventDefault();
-  });
-
-  // Vertical swipe — ignored when the touch starts on interactive controls
-  let touchY = null;
-  container.addEventListener("touchstart", (e) => {
-    touchY = e.target.closest("input, .star-row, button") ? null : e.touches[0].clientY;
-  }, { passive: true });
-  container.addEventListener("touchend", (e) => {
-    if (touchY == null) return;
-    const dy = e.changedTouches[0].clientY - touchY;
-    if (Math.abs(dy) > 60) show(current + (dy < 0 ? 1 : -1), dy < 0 ? 1 : -1);
-    touchY = null;
-  }, { passive: true });
 
   steps[0].classList.add("active");
   dots[0].classList.add("active");
