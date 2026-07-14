@@ -1,5 +1,6 @@
-import os
 import hashlib
+import os
+
 import pandas as pd
 
 # Only code maintainers have access to the fetch script
@@ -8,28 +9,27 @@ try:
 except ImportError:
     fetch_responses = None
 
-from constants import MIN_RATINGS, DATA_FILEPATH
+from constants import ALL_FILMS, DATA_FILEPATH, MIN_RATINGS
 
-def read_responses() -> pd.DataFrame:
-    """
-    Read form responses from CSV, optionally refreshing from Google Sheets.
-    If the file is missing and fetch is unavailable, raises FileNotFoundError.
-    """
-    can_fetch   = fetch_responses is not None
-    file_exists = os.path.isfile(DATA_FILEPATH)
 
-    if not file_exists and not can_fetch:
-        raise FileNotFoundError(f"{DATA_FILEPATH} not found--create an issue in GitHub.")
+def read_responses(refresh: bool = False) -> pd.DataFrame:
+    """Read form responses from CSV, optionally refreshing from Google Sheets."""
+    if refresh:
+        if fetch_responses is None:
+            raise RuntimeError("Fetching is reserved for maintainers (fetch.py not present).")
+        return fetch_responses()
 
-    if can_fetch:
-        prompt  = "Refresh responses from Google Sheets?" if file_exists else "File not found. Fetch from Google Sheets?"
-        do_fetch = input(f"{prompt} (y/n): ").strip().lower() in ("y", "yes")
-        if do_fetch:
-            return fetch_responses()
-
+    if not os.path.isfile(DATA_FILEPATH):
+        raise FileNotFoundError(f"{DATA_FILEPATH} not found — create an issue in GitHub.")
     return pd.read_csv(DATA_FILEPATH)
 
+
 def clean(df: pd.DataFrame) -> pd.DataFrame:
+    # Restrict to films the index still tracks — the raw CSV can carry columns
+    # for retired films (e.g. Insomnia), which must not count toward a
+    # respondent's rating total or leak into any downstream computation.
+    df = df[ALL_FILMS]
+
     # Coerce to numeric — empty cells become NaN
     df = df.apply(pd.to_numeric, errors="coerce")
 
@@ -39,11 +39,10 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 
     # Drop users below minimum rating threshold
     df = df[df.count(axis=1) >= MIN_RATINGS]
-    print(f"Users after filtering: {len(df)}")
 
-    # Normalize 1–10 to 0.5–5.0
+    # Normalize 1-10 to 0.5-5.0
     return df / 2.0
 
-def read_and_clean() -> pd.DataFrame:
-    raw_data = read_responses()
-    return clean(raw_data)
+
+def read_and_clean(refresh: bool = False) -> pd.DataFrame:
+    return clean(read_responses(refresh))

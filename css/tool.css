@@ -1,81 +1,138 @@
-/* ── Tiresias — tool page ──────────────────────────────────────────────────── */
+/* ── Tiresias — tool page: Wrapped-style step flow ─────────────────────────── */
 
 body.tool-page {
-  min-height: 100vh;
-  padding: 48px 24px 80px;
+  height: 100dvh;
+  overflow: hidden;
 }
 
-.container {
-  max-width: 680px;
+/* ── Steps ── */
+.steps {
+  position: relative;
+  height: 100dvh;
+  outline: none;
+}
+
+.step {
+  position: absolute;
+  inset: 0;
+  display: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: max(24px, env(safe-area-inset-top)) 20px max(80px, env(safe-area-inset-bottom));
+}
+.step.active { display: block; }
+
+.step-inner {
+  max-width: 620px;
   margin: 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: step-in 0.45s ease both;
+}
+.step.from-above .step-inner { animation-name: step-in-down; }
+
+@keyframes step-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes step-in-down {
+  from { opacity: 0; transform: translateY(-28px); }
+  to   { opacity: 1; transform: none; }
 }
 
-/* ── Header ── */
-header { margin-bottom: 36px; }
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-  transition: color var(--transition);
-}
-.back-link:hover { color: var(--green-dark); }
-.back-link::before { content: "←"; }
-
-header h1 {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 6px;
+@media (prefers-reduced-motion: reduce) {
+  .step-inner { animation: none; }
 }
 
-header p {
+.step h1 {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+.step h1 .year { font-size: 0.6em; color: var(--text-muted); font-weight: normal; }
+
+.step-lede {
+  font-size: 0.95rem;
   color: var(--text-sec);
-  font-size: 0.97rem;
-  line-height: 1.55;
+  line-height: 1.6;
+  margin-bottom: 22px;
 }
 
-.rule {
+/* ── Progress dots ── */
+.step-dots {
+  position: fixed;
+  right: max(10px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 5;
+}
+.step-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background var(--transition), transform var(--transition);
+}
+.step-dot.active { background: var(--green-mid); transform: scale(1.35); }
+
+/* ── Buttons ── */
+.step-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.primary-btn {
+  flex: 1;
+  padding: 15px 22px;
+  background: var(--green-dark);
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: bold;
   border: none;
-  border-top: 1px solid var(--border);
-  margin: 16px 0 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition);
 }
+.primary-btn:hover:not(:disabled) { background: var(--green-mid); }
+.primary-btn:disabled { background: #bbb; cursor: not-allowed; }
 
-/* ── Instructions ── */
-.instructions {
-  background: var(--panel);
-  border-left: 3px solid var(--green-light);
-  padding: 14px 18px;
-  font-size: 0.9rem;
-  color: #444;
-  line-height: 1.65;
-  margin-bottom: 32px;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+.ghost-btn {
+  padding: 15px 18px;
+  background: none;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
 }
+.ghost-btn:hover { color: var(--green-dark); border-color: var(--green-mid); }
 
-/* ── Film grid ── */
+/* ── Step 1: film grid ── */
 .film-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 32px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
-
-@media (max-width: 520px) {
-  .film-grid { grid-template-columns: 1fr; }
+@media (max-width: 540px) {
+  .film-grid { grid-template-columns: 1fr; gap: 9px; }
 }
 
 .film-card {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 12px 14px;
   transition: border-color var(--transition);
 }
-
 .film-card.rated { border-color: var(--green-light); }
 
 .film-card label {
@@ -83,8 +140,16 @@ header p {
   font-size: 0.85rem;
   font-weight: bold;
   color: var(--text-sec);
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
+
+.min-notice {
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.min-notice span { color: var(--rust); font-weight: bold; }
 
 /* ── Stars ── */
 .star-row {
@@ -92,18 +157,34 @@ header p {
   align-items: center;
   gap: 3px;
   flex-wrap: wrap;
+  border-radius: var(--radius-sm);
 }
+.star-row:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 3px; }
 
-.half-star {
-  font-size: 1.25rem;
-  cursor: pointer;
-  color: #ccc;
-  transition: color 0.1s;
-  user-select: none;
+.star {
+  position: relative;
+  font-size: 1.5rem;
   line-height: 1;
+  cursor: pointer;
+  user-select: none;
 }
-.half-star.active { color: var(--green-light); }
-.half-star:hover  { color: var(--green-dark); }
+.star-base { color: #ccc; }
+.star-fill {
+  position: absolute;
+  left: 0; top: 0;
+  width: 0;
+  overflow: hidden;
+  color: var(--green-mid);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hit {
+  position: absolute;
+  top: 0; height: 100%; width: 50%;
+  z-index: 1;
+}
+.hit-left  { left: 0; }
+.hit-right { right: 0; }
 
 .unseen-btn {
   margin-left: 5px;
@@ -126,54 +207,126 @@ header p {
   height: 13px;
 }
 
-/* ── Predict button ── */
-.predict-btn {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  background: var(--green-dark);
-  color: #fff;
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
+/* ── Step 2: alpha / beta ── */
+.alpha-figures {
+  display: flex;
+  justify-content: center;
+  gap: clamp(30px, 10vw, 70px);
+  margin: 10px 0 20px;
+}
+.alpha-figure { text-align: center; }
+.alpha-value {
+  font-size: clamp(2.8rem, 10vw, 4rem);
   font-weight: bold;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background var(--transition);
-  margin-bottom: 12px;
+  color: var(--rust);
+  line-height: 1.1;
 }
-.predict-btn:hover:not(:disabled) { background: var(--green-mid); }
-.predict-btn:disabled { background: #bbb; cursor: not-allowed; }
-
-.min-notice {
-  text-align: center;
-  font-size: 0.84rem;
+.alpha-figure:last-child .alpha-value { color: var(--green-mid); }
+.alpha-name {
+  font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 28px;
-}
-.min-notice span { color: var(--rust); font-weight: bold; }
-
-/* ── Result card ── */
-#result {
-  display: none;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  margin-top: 8px;
-}
-
-#result h2 {
-  font-size: 0.95rem;
-  color: var(--text-sec);
-  margin-bottom: 14px;
-  font-weight: normal;
   font-style: italic;
 }
 
+.alpha-bar {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--green-mid);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.alpha-bar-fill {
+  height: 100%;
+  background: var(--rust);
+  border-radius: 6px 0 0 6px;
+  transition: width 0.8s ease;
+}
+
+.wit-line {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  text-align: center;
+  padding: 14px 18px;
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+/* ── Steps 3-4: chart ── */
+.chart-axis       { stroke: #1d6d47; stroke-width: 2; }
+.chart-grid       { stroke: #d8d8d8; stroke-width: 0.7; stroke-dasharray: 4 3; }
+
+/* Marker: large translucent ring + small solid centre */
+.chart-dot-ring   { fill: #f0f0f0; stroke: #89dd9d; stroke-width: 1.8; }
+.chart-dot-centre { fill: #89dd9d; }
+
+/* Three-pass glow matching the matplotlib style */
+.chart-fit-glow-lg { fill: none; stroke: #c4694d; stroke-width: 10; opacity: 0.08; stroke-linecap: round; }
+.chart-fit-glow-md { fill: none; stroke: #c4694d; stroke-width: 6;  opacity: 0.13; stroke-linecap: round; }
+.chart-fit-glow-sm { fill: none; stroke: #c4694d; stroke-width: 3;  opacity: 0.22; stroke-linecap: round; }
+.chart-fit         { fill: none; stroke: #c4694d; stroke-width: 1.6; stroke-linecap: round; }
+
+/* Tick numbers */
+.chart-tick {
+  font-family: "Liberation Serif", "Georgia", serif;
+  font-size: 13px;
+  fill: #555555;
+}
+
+/* Axis labels — italic green serif to match the matplotlib plots */
+.chart-axis-label {
+  font-family: "Liberation Serif", "Georgia", serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+  fill: #1d6d47;
+}
+
+/* Film name labels */
+.chart-label {
+  font-family: "Liberation Serif", "Georgia", serif;
+  font-size: 13px;
+  fill: #1d6d47;
+}
+
+/* ── Step 5: sliders + verdict ── */
+.slider-block { margin-bottom: 10px; }
+.slider-block label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+  color: var(--text-sec);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+.slider-value {
+  font-style: normal;
+  font-weight: bold;
+  color: var(--rust);
+  font-family: var(--font-mono);
+}
+
+input[type="range"] {
+  width: 100%;
+  margin: 0 0 20px;
+  accent-color: var(--green-dark);
+  height: 28px;   /* generous touch target */
+  cursor: pointer;
+}
+
+.verdict {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 20px;
+  text-align: center;
+}
+
 .big-rating {
-  font-size: 3.8rem;
+  font-size: 3.6rem;
   font-weight: bold;
   color: var(--rust);
   line-height: 1;
@@ -181,13 +334,122 @@ header p {
 }
 
 .stars-display {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   color: var(--green-light);
+  margin-bottom: 12px;
+}
+
+.prophecy {
+  font-size: 0.93rem;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto 12px;
+}
+.prophecy p + p { margin-top: 8px; }
+
+.oscar-prophecy {
+  font-size: 0.87rem;
+  color: #8a6a0e;
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+/* ── Site credit: floats in the bottom padding every step reserves ── */
+.tool-page .site-credit {
+  position: fixed;
+  left: 0; right: 0;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  z-index: 4;              /* under the progress dots and modal */
+  pointer-events: none;    /* never blocks taps or swipes */
+}
+
+/* ── Share modal ── */
+.share-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.share-modal[hidden] { display: none; }
+
+.share-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.55);
+}
+
+.share-panel {
+  position: relative;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  max-width: 340px;
+  width: 100%;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  animation: share-in 0.3s ease both;
+}
+@keyframes share-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.share-preview {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
   margin-bottom: 14px;
 }
 
-.confidence {
+.share-actions {
+  display: flex;
+  gap: 8px;
+}
+.share-actions .primary-btn,
+.share-actions .ghost-btn { flex: 1; padding: 12px 10px; font-size: 0.9rem; }
+
+.share-close {
+  position: absolute;
+  top: 6px; right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.share-status {
+  text-align: center;
   font-size: 0.8rem;
-  color: var(--text-muted);
   font-style: italic;
+  color: var(--text-muted);
+  margin-top: 10px;
+  min-height: 1em;
+}
+
+/* ── Load-error banner ── */
+.load-error {
+  display: none;
+  position: fixed;
+  top: 12px; left: 12px; right: 12px;
+  z-index: 10;
+  background: #fbeae4;
+  border: 1px solid var(--rust);
+  border-radius: var(--radius-md);
+  color: var(--rust-dark);
+  padding: 14px 18px;
+  font-size: 0.9rem;
 }

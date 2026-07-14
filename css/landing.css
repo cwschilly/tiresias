@@ -1,100 +1,89 @@
 /* ── Tiresias — landing page ───────────────────────────────────────────────── */
 
 body.landing {
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: var(--bg);
-  overflow: hidden;
-  gap: 0;
 }
 
-/* ── Title ── */
-.title-block {
+.landing-stage {
   text-align: center;
-  margin-bottom: 52px;
+  padding: 24px;
+  max-width: 480px;
   user-select: none;
 }
 
-.title-block h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: bold;
+.landing-stage h1 {
+  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  letter-spacing: 0.12em;
   color: var(--text);
-  letter-spacing: 0.08em;
-  line-height: 1.1;
+  margin-bottom: 8px;
 }
 
-.title-block .subtitle {
-  font-size: clamp(0.85rem, 2vw, 1rem);
+.subtitle {
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
   color: var(--text-sec);
-  margin-top: 10px;
   font-style: italic;
-  letter-spacing: 0.02em;
+  margin-bottom: 34px;
 }
 
-/* ── Ask button — sits above the eye ── */
+/* ── Button, link & footer ── */
 .ask-btn {
-  position: relative;
-  z-index: 10;
-  padding: 14px 42px;
+  display: inline-block;
+  padding: 15px 44px;
   background: var(--green-dark);
   color: #fff;
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: bold;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   border: none;
   border-radius: 40px;
   cursor: pointer;
+  box-shadow: 0 2px 14px rgba(29, 109, 71, 0.2);
   transition: background var(--transition), transform var(--transition),
               box-shadow var(--transition);
-  box-shadow: 0 2px 14px rgba(29, 109, 71, 0.2);
-  margin-bottom: 28px;   /* gap between button and eye line */
 }
-
-.ask-btn:hover {
+.ask-btn:hover:not(:disabled) {
   background: var(--green-mid);
   transform: translateY(-2px);
   box-shadow: 0 6px 22px rgba(29, 109, 71, 0.3);
 }
+.ask-btn:active { transform: translateY(0); }
+.ask-btn:disabled { opacity: 0.7; cursor: wait; transform: none; }
 
-.ask-btn:active  { transform: translateY(0); }
-.ask-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+.what-line { margin-top: 18px; }
 
-/* ── Eye stage — wide, short strip below the button ── */
-.eye-stage {
-  width: min(440px, 90vw);
-  height: 80px;
+.what-link {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--green-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
 }
+.what-link:hover { color: var(--rust); }
 
-#eye-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-/* Inner eye elements — opacity driven by JS */
-.eye-iris  { fill: var(--green-dark); opacity: 0; }
-.eye-pupil { fill: #0e1a14;           opacity: 0; }
-.eye-shine { fill: rgba(255,255,255,0.7); opacity: 0; }
-
-/* ── Expand overlay (iris circle that fills screen on click) ── */
-#expand-overlay {
-  position: fixed;
-  border-radius: 50%;
-  background: var(--green-dark);
-  width: 0; height: 0;
-  pointer-events: none;
-  z-index: 200;
-}
-
-/* ── Footer ── */
 .landing-footer {
-  position: absolute;
-  bottom: 28px;
+  margin-top: 40px;
   font-size: 0.78rem;
   color: var(--text-muted);
+  font-style: italic;
   letter-spacing: 0.02em;
 }
+
+.landing .site-credit { margin-top: 6px; }
+
+/* ── Departure overlay: simple fade to page background ── */
+.depart-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease 0.2s;
+  z-index: 20;
+}
+.depart-overlay.visible { opacity: 1; }

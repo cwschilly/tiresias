@@ -1,7 +1,8 @@
-torch
-onnx
+numpy
 pandas
 scikit-learn
+matplotlib
 gspread
-onnx
-onnxruntime
+pytest
+requests
+beautifulsoup4

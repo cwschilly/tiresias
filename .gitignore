@@ -4,6 +4,11 @@ output/
 # Data fetching (reserved for admins)
 fetch.py
 credentials.json
+data/
 
 # Python artifacts
 __pycache__/
+.pytest_cache
+
+# Internal documentation
+doc/

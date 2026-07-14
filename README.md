@@ -6,44 +6,6 @@ Will Christopher Nolan's _The Odyssey_ (2026) be good? Will it win any awards? A
 
 Tiresias ([who?](https://en.wikipedia.org/wiki/Tiresias)) is here to peer into the future.
 
-<!-- Read all about it [here](calebschilly.substack.com). -->
+Read all about it [here](calebschilly.substack.com), and test it out yourself at:
 
-## Usage
-
-For now, clone the repo and install the `tiresias` package into your favorite Python environment:
-
-```sh
-git clone https://github.com/cwschilly/tiresias.git
-cd tiresias
-pip install .
-```
-
-Then just run:
-
-```sh
-python tiresias.py
-```
-
-> [!TIP]
-> At any point in the execution, exit the program by typing `Ctrl + C`.
-
-I'm hoping to move all this into a web app soon, which will remove the installation step and make the runtime even simpler.
-In the meantime, this is what we've got.
-
-## Contributing
-
-`tiresias` is, of course, open-source. Feel free to [open issues](https://github.com/cwschilly/tiresias/issues/new), put up PRs with cool features, and generally ~~steal~~ use the project as you like.
-There's a short developer's guide in the `doc/` folder if you're interested in contributing.
-
----
-
-### Sources
-
-Training data was obtained from the following sources:
-
-- [Letterboxd](letterboxd.com) _(Average and personalized ratings)_
-- [Collider](https://collider.com/christopher-nolan-movies-oscar-nominations-ranked/) _(Oscar Noms/Wins)_
-- [Collider](https://collider.com/christopher-nolan-movie-budgets-ranked/) _(Budgets)_
-- [Cineworld](https://www.cineworld.co.uk/static/en/uk/blog/christopher-nolan-six-memorable-imax-movie-scenes) _(IMAX Releases)_
-- [MovieWeb](https://movieweb.com/christopher-nolan-movies-ranked-by-box-office-performance/) _(Box Office)_
-- [Box Office Mojo](https://www.boxofficemojo.com/year/) _(Annual Box Office)_
+### [willtheodysseybegood.com](willtheodysseybegood.com)

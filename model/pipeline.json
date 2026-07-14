@@ -1,0 +1,89 @@
+{
+  "films": [
+    {
+      "key": "following",
+      "label": "Following (1998)",
+      "fabula": 3.0,
+      "syuzhet": 4.0
+    },
+    {
+      "key": "memento",
+      "label": "Memento (2000)",
+      "fabula": 2.0,
+      "syuzhet": 8.0
+    },
+    {
+      "key": "batman_begins",
+      "label": "Batman Begins (2005)",
+      "fabula": 3.0,
+      "syuzhet": 1.0
+    },
+    {
+      "key": "the_prestige",
+      "label": "The Prestige (2006)",
+      "fabula": 4.0,
+      "syuzhet": 7.0
+    },
+    {
+      "key": "the_dark_knight",
+      "label": "The Dark Knight (2008)",
+      "fabula": 4.0,
+      "syuzhet": 1.0
+    },
+    {
+      "key": "inception",
+      "label": "Inception (2010)",
+      "fabula": 5.0,
+      "syuzhet": 5.0
+    },
+    {
+      "key": "the_dark_knight_rises",
+      "label": "The Dark Knight Rises (2012)",
+      "fabula": 3.0,
+      "syuzhet": 1.0
+    },
+    {
+      "key": "interstellar",
+      "label": "Interstellar (2014)",
+      "fabula": 6.0,
+      "syuzhet": 2.0
+    },
+    {
+      "key": "dunkirk",
+      "label": "Dunkirk (2017)",
+      "fabula": 1.0,
+      "syuzhet": 7.0
+    },
+    {
+      "key": "tenet",
+      "label": "Tenet (2020)",
+      "fabula": 10.0,
+      "syuzhet": 10.0
+    },
+    {
+      "key": "oppenheimer",
+      "label": "Oppenheimer (2023)",
+      "fabula": 2.0,
+      "syuzhet": 4.0
+    }
+  ],
+  "odyssey": {
+    "label": "The Odyssey (2026)",
+    "fabula": 3.0,
+    "syuzhet": 6.0
+  },
+  "min_ratings": 3,
+  "oscars": {
+    "coeffs": {
+      "noms": {
+        "intercept": 1.732197798472448,
+        "metric": -0.0379588190230785
+      },
+      "wins": {
+        "intercept": 0.7588008095008091,
+        "metric": -0.042554068497542216
+      },
+      "method": "euclidean"
+    }
+  }
+}

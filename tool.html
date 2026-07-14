@@ -2,48 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Tiresias — Rate & Predict</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
   <link rel="stylesheet" href="css/theme.css"/>
   <link rel="stylesheet" href="css/tool.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.17.1/ort.min.js"></script>
 </head>
 <body class="tool-page">
-<div class="container">
 
-  <header>
-    <a class="back-link" href="index.html">Back to Tiresias</a>
-    <h1>Will you like<br><em>The Odyssey</em>?</h1>
-    <hr class="rule"/>
-    <p>
-      Rate the Nolan films you've seen below. Tiresias will use your taste
-      profile to predict your rating for <em>The Odyssey</em>.
-    </p>
-  </header>
+<div class="load-error" id="loadError"></div>
 
-  <div class="instructions">
-    Use the half-star selectors to rate each film you've seen — skip anything
-    you haven't watched. The more you rate, the sharper the prediction.
-    A minimum of <strong>3 ratings</strong> is required.
+<main class="steps" id="steps" tabindex="0">
+
+  <!-- Step 1: rate the films -->
+  <section class="step" id="stepRate">
+    <div class="step-inner">
+      <h1>Rate the films</h1>
+      <p class="step-lede">
+        Tap the stars for every Nolan film you've seen (left half = half star);
+        skip the rest. The more you rate, the better the prophecy.
+        At least <strong>3 ratings</strong> are required.
+      </p>
+      <div class="film-grid" id="filmGrid"></div>
+      <div class="min-notice" id="minNotice">
+        Rate <span id="remaining">3</span> more film(s) before consulting the blind seer.
+      </div>
+      <button class="primary-btn" id="askBtn" disabled>Ask Tiresias</button>
+    </div>
+  </section>
+
+  <!-- Step 2: alpha / beta reveal -->
+  <section class="step" id="stepAlpha">
+    <div class="step-inner">
+      <h1>Your wackiness tolerance</h1>
+      <p class="step-lede">
+        Tiresias reads two things in your entrails: how much the
+        <em>events</em> of a movie drive your taste (<strong>fabula, α</strong>) and how
+        much the <em>telling</em> does (<strong>syuzhet, β</strong>).
+      </p>
+      <div class="alpha-figures">
+        <div class="alpha-figure">
+          <div class="alpha-value" id="alphaValue"></div>
+          <div class="alpha-name">α · fabula</div>
+        </div>
+        <div class="alpha-figure">
+          <div class="alpha-value" id="betaValue"></div>
+          <div class="alpha-name">β · syuzhet</div>
+        </div>
+      </div>
+      <div class="alpha-bar"><div class="alpha-bar-fill" id="alphaBarFill"></div></div>
+      <p class="wit-line" id="alphaWit"></p>
+      <div class="step-nav">
+        <button class="ghost-btn" data-nav="back">Back</button>
+        <button class="primary-btn" data-nav="next">See the augeries</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3: scatter -->
+  <section class="step" id="stepScatter">
+    <div class="step-inner">
+      <h1>Your Nolan curve</h1>
+      <p class="step-lede">
+        Every film you rated plotted against its <strong>wackiness</strong>
+        (fabula and syuzhet aggregated according to your weights).
+      </p>
+      <svg class="chart" id="scatterChart" role="img"
+           aria-label="Your ratings plotted against personal wackiness"></svg>
+      <div class="step-nav">
+        <button class="ghost-btn" data-nav="back">Back</button>
+        <button class="primary-btn" data-nav="next">Fit the data</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 4: fit -->
+  <section class="step" id="stepFit">
+    <div class="step-inner">
+      <h1>The vision emerges</h1>
+      <p class="step-lede" id="fitSummary"></p>
+      <svg class="chart" id="fitChart" role="img"
+           aria-label="Your ratings with the fitted curve"></svg>
+      <p class="wit-line" id="fitWit"></p>
+      <div class="step-nav">
+        <button class="ghost-btn" data-nav="back">Back</button>
+        <button class="primary-btn" data-nav="next">Will I like The Odyssey?</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 5: The Odyssey -->
+  <section class="step" id="stepOdyssey">
+    <div class="step-inner">
+      <h1>The Odyssey <span class="year">(2026)</span></h1>
+      <p class="step-lede">
+        Use the sliders to see how you'll like The Odyssey at different
+        degrees of insanity.
+      </p>
+
+      <div class="slider-block">
+        <label for="fabulaSlider">
+          fabula craziness (the events) <span class="slider-value" id="fabulaValue"></span>
+        </label>
+        <input type="range" id="fabulaSlider" min="0" max="10" step="0.1"/>
+        <label for="syuzhetSlider">
+          syuzhet craziness (the telling) <span class="slider-value" id="syuzhetValue"></span>
+        </label>
+        <input type="range" id="syuzhetSlider" min="0" max="10" step="0.1"/>
+      </div>
+
+      <div class="verdict">
+        <div class="big-rating" id="bigRating"></div>
+        <div class="stars-display" id="starsDisplay"></div>
+        <div class="prophecy" id="prophecy"></div>
+        <div class="oscar-prophecy" id="oscarProphecy"></div>
+      </div>
+
+      <div class="step-nav">
+        <button class="ghost-btn" data-nav="back">Back</button>
+        <button class="ghost-btn" id="startOverBtn">Start over</button>
+        <button class="primary-btn" id="shareBtn">Share my results</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<p class="site-credit">Created by Caleb Schilly</p>
+
+<!-- Share modal: preview of the story card + whichever share paths this browser supports -->
+<div class="share-modal" id="shareModal" hidden>
+  <div class="share-backdrop" data-share-close></div>
+  <div class="share-panel">
+    <button class="share-close" data-share-close aria-label="Close">&times;</button>
+    <img class="share-preview" id="sharePreview" alt="Your Tiresias prophecy card"/>
+    <div class="share-actions">
+      <button class="primary-btn" id="shareNativeBtn" hidden>Share</button>
+      <button class="ghost-btn" id="shareCopyBtn" hidden>Copy image</button>
+      <button class="ghost-btn" id="shareDownloadBtn">Download</button>
+    </div>
+    <p class="share-status" id="shareStatus"></p>
   </div>
-
-  <div class="film-grid" id="filmGrid"></div>
-
-  <div class="min-notice" id="minNotice">
-    Rate at least <span id="remaining">3</span> more film(s) to unlock your prediction.
-  </div>
-
-  <button class="predict-btn" id="predictBtn" disabled>
-    Consult Tiresias
-  </button>
-
-  <div id="result">
-    <h2>Tiresias predicts your rating for <em>The Odyssey</em>:</h2>
-    <div class="big-rating" id="bigRating"></div>
-    <div class="stars-display" id="starsDisplay"></div>
-    <div class="confidence" id="confidenceNote"></div>
-  </div>
-
 </div>
 
 <script type="module" src="js/tool.js"></script>
