@@ -74,7 +74,12 @@ body.landing {
   letter-spacing: 0.02em;
 }
 
-.landing .site-credit { margin-top: 6px; }
+.landing .site-credit {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: max(14px, env(safe-area-inset-bottom));
+}
 
 /* ── Departure overlay: simple fade to page background ── */
 .depart-overlay {

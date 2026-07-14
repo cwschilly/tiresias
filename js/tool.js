@@ -182,7 +182,7 @@ function initShare() {
       await copyImage(shareBlob);
       setShareStatus("Copied.");
     } catch {
-      setShareStatus("Copy failed; try Download instead.");
+      setShareStatus(`Copy failed. ${saveHint()}`);
     }
   });
   document.getElementById("shareDownloadBtn").addEventListener("click", () =>
@@ -202,10 +202,24 @@ async function openShare() {
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = URL.createObjectURL(shareBlob);
   document.getElementById("sharePreview").src = previewUrl;
-  document.getElementById("shareNativeBtn").hidden = !canNativeShare(shareBlob);
+
+  // The native sheet (mobile) already offers Save to Photos / Messages /
+  // socials, so the raw Download is redundant — and on iOS it confusingly
+  // lands in Files. Offer it only when native share is unavailable.
+  const nativeOk = canNativeShare(shareBlob);
+  document.getElementById("shareNativeBtn").hidden = !nativeOk;
   document.getElementById("shareCopyBtn").hidden = !canCopyImage();
-  setShareStatus("");
+  document.getElementById("shareDownloadBtn").hidden = nativeOk;
+  setShareStatus(saveHint());
   document.getElementById("shareModal").hidden = false;
+}
+
+function saveHint() {
+  // Long-press (touch) / right-click (mouse) on the image opens the
+  // system menu — works even where the share/clipboard APIs don't
+  return window.matchMedia("(pointer: coarse)").matches
+    ? "Tip: press and hold the image to save or share it."
+    : "Tip: right-click the image to copy or save it.";
 }
 
 function closeShare() {

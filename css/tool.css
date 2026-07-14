@@ -360,15 +360,6 @@ input[type="range"] {
   border-top: 1px dashed var(--border);
 }
 
-/* ── Site credit: floats in the bottom padding every step reserves ── */
-.tool-page .site-credit {
-  position: fixed;
-  left: 0; right: 0;
-  bottom: max(10px, env(safe-area-inset-bottom));
-  z-index: 4;              /* under the progress dots and modal */
-  pointer-events: none;    /* never blocks taps or swipes */
-}
-
 /* ── Share modal ── */
 .share-modal {
   position: fixed;
