@@ -6,6 +6,6 @@ Will Christopher Nolan's _The Odyssey_ (2026) be good? Will it win any awards? A
 
 Tiresias ([who?](https://en.wikipedia.org/wiki/Tiresias)) is here to peer into the future.
 
-Read all about it [here](calebschilly.substack.com), and test it out yourself at:
+Read all about it [here](https://open.substack.com/pub/calebschilly/p/will-the-odyssey-be-any-good?r=ey3c2&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true), and test it out yourself at:
 
 ### [willtheodysseybegood.com](willtheodysseybegood.com)
