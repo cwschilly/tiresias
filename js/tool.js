@@ -206,7 +206,10 @@ async function openShare() {
   // The native sheet (mobile) already offers Save to Photos / Messages /
   // socials, so the raw Download is redundant — and on iOS it confusingly
   // lands in Files. Offer it only when native share is unavailable.
-  const nativeOk = canNativeShare(shareBlob);
+  // Desktop counts as unavailable: macOS drafts the share in Messages
+  // without ever bringing the app forward, so copy/download serve better.
+  const nativeOk = canNativeShare(shareBlob) &&
+                   window.matchMedia("(pointer: coarse)").matches;
   document.getElementById("shareNativeBtn").hidden = !nativeOk;
   document.getElementById("shareCopyBtn").hidden = !canCopyImage();
   document.getElementById("shareDownloadBtn").hidden = nativeOk;

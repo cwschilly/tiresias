@@ -172,8 +172,7 @@ export function canCopyImage() {
 export function nativeShare(blob) {
   return navigator.share({
     files: [cardFile(blob)],
-    title: "My Tiresias prophecy",
-    text: `Tiresias has foreseen my Odyssey rating — ${SITE_URL}`,
+    text: `Tiresias has foreseen my Odyssey rating: ${SITE_URL}`,
   });
 }
 
