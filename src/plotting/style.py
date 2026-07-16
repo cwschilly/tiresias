@@ -18,6 +18,7 @@ GREEN_MID   = "#2a8f5e"
 GREEN_LIGHT = "#89dd9d"
 RUST        = "#c4694d"
 RUST_DARK   = "#a3502e"
+GOLD        = "#d4a017"
 GRID        = "#d8d8d8"
 BORDER      = "#cccccc"
 INK         = "#1a1a1a"
@@ -107,6 +108,15 @@ def fit_line(ax, x, y, color: str = RUST, label: str = None, **kwargs):
         defaults["label"] = label
     defaults.update(kwargs)
     return ax.plot(x, y, **defaults)
+
+
+def equation_box(ax, text: str):
+    """Small italic caption describing the fit, boxed to match the panel."""
+    return ax.text(0.03, 0.95, text, transform=ax.transAxes,
+                   fontsize=11, style="italic", fontfamily=FONT_SERIF,
+                   color=INK, ha="left", va="top",
+                   bbox=dict(boxstyle="round,pad=0.45", facecolor=BG,
+                             edgecolor=BORDER, alpha=0.9))
 
 
 def add_legend(ax):
