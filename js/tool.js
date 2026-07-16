@@ -57,7 +57,7 @@ function onEnter(step) {
   if (step === STEP.ALPHA) refit();
   else if (step === STEP.SCATTER) renderScatter(false);
   else if (step === STEP.FIT) renderScatter(true);
-  else if (step === STEP.ODYSSEY) updateOdyssey();
+  else if (step === STEP.ODYSSEY) enterOdyssey();
 }
 
 function refit() {
@@ -136,12 +136,25 @@ function refreshGate() {
 
 /* ── Step 5: Odyssey sliders ── */
 function buildSliders() {
-  const fabula = document.getElementById("fabulaSlider");
-  const syuzhet = document.getElementById("syuzhetSlider");
-  fabula.value = pipeline.odyssey.fabula;
-  syuzhet.value = pipeline.odyssey.syuzhet;
-  fabula.addEventListener("input", updateOdyssey);
-  syuzhet.addEventListener("input", updateOdyssey);
+  document.getElementById("fabulaSlider").addEventListener("input", updateOdyssey);
+  document.getElementById("syuzhetSlider").addEventListener("input", updateOdyssey);
+}
+
+// Cached per fit: invalidated with `personal` whenever ratings change.
+function optimalFor(p) {
+  return (p.optimal ??= computeOptimal(p));
+}
+
+function enterOdyssey() {
+  if (!personal) refit();
+  // Seed the sliders with this person's ideal — the same values the share
+  // card shows. Once seeded for a given fit, keep their manual tweaks.
+  if (!personal.optimal) {
+    const optimal = optimalFor(personal);
+    document.getElementById("fabulaSlider").value = optimal.fabula;
+    document.getElementById("syuzhetSlider").value = optimal.syuzhet;
+  }
+  updateOdyssey();
 }
 
 function updateOdyssey() {
@@ -191,7 +204,7 @@ function initShare() {
 
 async function openShare() {
   if (!personal) refit();
-  const optimal = computeOptimal(personal);
+  const optimal = optimalFor(personal);
   const counts = oscarCounts(pipeline.oscars.coeffs, optimal.fabula, optimal.syuzhet);
 
   const canvas = document.createElement("canvas");
