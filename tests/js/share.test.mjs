@@ -38,6 +38,18 @@ test("returned rating matches predictAt at the returned point", () => {
   assert.equal(opt.rating, predictAt(p, opt.fabula, opt.syuzhet));
 });
 
+test("the optimum lands on the sliders' grid (0..10, step 0.1)", () => {
+  // tool.js seeds the range inputs with these values, so they must be
+  // in-range multiples of the 0.1 step or the browser would clamp/snap them
+  for (const coeffs of [[0.25, 0.5], [-0.25, 4.5], [-0.1, 1.2, 1.0]]) {
+    const opt = computeOptimal(personal(coeffs));
+    for (const v of [opt.fabula, opt.syuzhet]) {
+      assert.ok(v >= 0 && v <= 10, `${v} out of range`);
+      assert.ok(Math.abs(v * 10 - Math.round(v * 10)) < 1e-9, `${v} off-grid`);
+    }
+  }
+});
+
 test("the card URL is the real domain", () => {
   assert.equal(SITE_URL, "willtheodysseybegood.com");
 });
