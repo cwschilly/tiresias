@@ -60,6 +60,21 @@ body.tool-page {
   margin-bottom: 22px;
 }
 
+/* Mirrors .landing-footer (landing.css) */
+.blog-nudge {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin: -12px 0 22px;
+}
+.blog-nudge a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.blog-nudge a:hover { color: var(--rust); }
+
 /* ── Progress dots ── */
 .step-dots {
   position: fixed;
